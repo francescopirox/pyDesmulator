@@ -13,12 +13,16 @@ class Simulator:
         self.event_list.sort()
 
     def process(self):
-        if len(self.event_list)==0:
-            raise Exception("Simulation DeadLock")
-        evt=self.event_list.pop()
-        if evt.arrival_station is not None:
-            evt.arrival_station.receive_event(evt)
-        self.time_advance()
+        while self.time < self.end_time:
+            if len(self.event_list)==0:
+                raise Exception("Simulation DeadLock")
+            evt=self.event_list.pop()
+
+            if evt.arrival_station is not None:
+                evt.arrival_station.receive_event(evt)
+            else:
+                evt.departure_station.receive_event(evt)
+            self.time_advance()
 
     def time_advance(self):
         print(self.time)

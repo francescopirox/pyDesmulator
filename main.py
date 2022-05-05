@@ -10,7 +10,7 @@ from station import Station
 
 if __name__ == '__main__':
 
-    s=Simulator(1000)
+    s=Simulator(1050)
     st1 = Station(None, None,s)
     s.start_simulation()
 

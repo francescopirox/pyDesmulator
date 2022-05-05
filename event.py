@@ -10,7 +10,7 @@ class Event:
         self.arrival_station=arrival_station
 
     def __str__(self):
-        return str(self.arrival_station)+str(self.departure_station)+self.time_stamp
+        return str(self.arrival_station)+" "+str(self.departure_station)+" "+str(self.time_stamp)
 
 
     def __cmp__(self, other):

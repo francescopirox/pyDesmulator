@@ -13,17 +13,23 @@ class Station:
         self.simulator.station_bind(self)
 
     def receive_event(self, event):
-        print(str(event)+ "ciaooo")
+        print(str(event))
+        if event.arrival_station == event.departure_station :
+            self.service_client_start(event)
+        else:
+            self.service_client_start(event)
 
     def start(self):
         print("stazione partita")
-        evt = Event(1000, self, self.next_station)
+        evt = Event(1000, self, self)
         self.simulator.schedule_event(evt)
 
     def service_client_start(self,event):
+        print("cliente in lavorazione")
         evt= Event(event.time_stamp+1,self,self)
         self.simulator.schedule_event(evt)
 
     def service_client_stop(self,event):
+        print(" cliente terminato")
         evt = Event(event.time_stamp + 1000, self, self.next_station)
         self.simulator.schedule_event(evt)
