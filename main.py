@@ -5,13 +5,20 @@
 
 
 # Press the green button in the gutter to run the script.
+from clientgenerator import ClientGenerator
+from distribution import Distribution
 from simulator import Simulator
 from station import Station
 
 if __name__ == '__main__':
 
     s=Simulator(1050)
-    st1 = Station(None, None,s)
+    d=Distribution()
+    st2 = Station(None, None, s)
+    st1 = Station(st2, None, s)
+    st2.next_station=st1
+    gen=ClientGenerator(st1, None, s, d)
+
     s.start_simulation()
 
 

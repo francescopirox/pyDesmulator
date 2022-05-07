@@ -1,3 +1,6 @@
+import event
+
+
 class Simulator:
     time=0
     end_time=0
@@ -17,11 +20,23 @@ class Simulator:
             if len(self.event_list)==0:
                 raise Exception("Simulation DeadLock")
             evt=self.event_list.pop()
+            if evt is None:
+                raise Exception("evt is none")
 
-            if evt.arrival_station is not None:
-                evt.arrival_station.receive_event(evt)
-            else:
-                evt.departure_station.receive_event(evt)
+            if evt.type is not event.EventType.NULL:
+                pass
+            if evt.type is event.EventType.DEPARTURE:
+                evt.departure_station.client_departure(evt)
+
+            if evt.type is event.EventType.ARRIVAL:
+                evt.arrival_station.client_arrival(evt)
+
+            if evt.type is event.EventType.START_PROCESS:
+                evt.departure_station.service_client_start(evt)
+
+            if evt.type is event.EventType.END_PROCESS:
+                evt.departure_station.service_client_stop(evt)
+
             self.time_advance()
 
     def time_advance(self):
@@ -33,10 +48,6 @@ class Simulator:
             self.time=next_evt.time_stamp
 
     def start_simulation(self):
-        if len(self.station_list)==0:
-            raise Exception("no station binded to the simulator")
-        for s in self.station_list:
-            s.start()
         self.time_advance()
         self.process()
 
