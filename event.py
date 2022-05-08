@@ -12,12 +12,12 @@ class EventType(Enum):
 
 
 class Event:
-    time_stamp = 0
+    time_stamp: int = 0
     arrival_station = None
     departure_station = None
     type = EventType.NULL
 
-    def __init__(self, time_stamp, departure_station, arrival_station, event_type):
+    def __init__(self, time_stamp: int, departure_station, arrival_station, event_type):
         self.time_stamp = time_stamp
         self.departure_station = departure_station
         self.arrival_station = arrival_station
@@ -27,11 +27,11 @@ class Event:
         return str(self.arrival_station) + " " + str(self.departure_station) + " " + str(self.time_stamp)
 
     def __cmp__(self, other):
-        return self.compare(other)
-
-    def compare(self, evt_2):
-        if self.time_stamp > evt_2.time_stamp:
+        if self.time_stamp > other.time_stamp:
             return 1
-        if self.time_stamp < evt_2.time_stamp:
+        elif self.time_stamp < other.time_stamp:
             return -1
         return 0
+
+    def add_time(self, delay: int):
+        self.time_stamp = self.time_stamp + delay

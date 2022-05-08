@@ -12,6 +12,7 @@ class Simulator:
         self.end_time=end_time
 
     def schedule_event(self,event):
+        event.add_time(self.time)
         self.event_list.append(event)
         self.event_list.sort()
 
