@@ -13,18 +13,29 @@ class EventType(Enum):
 
 class Event:
     time_stamp: int = 0
-    arrival_station = None
-    departure_station = None
+    destination = None
     type = EventType.NULL
 
-    def __init__(self, time_stamp: int, departure_station, arrival_station, event_type):
+    def __init__(self, time_stamp: int, destination, event_type):
         self.time_stamp = time_stamp
-        self.departure_station = departure_station
-        self.arrival_station = arrival_station
+        self.destination = destination
         self.type = event_type
 
     def __str__(self):
-        return str(self.arrival_station) + " " + str(self.departure_station) + " " + str(self.time_stamp)
+        eventtype:str =""
+        if(self.type == EventType.ARRIVAL):
+            eventtype="Client arrival "
+        elif(self.type == EventType.DEPARTURE):
+            eventtype="Client departure"
+        elif(self.type == EventType.START_PROCESS):
+            eventtype="Client service start"
+        elif(self.type == EventType.END_PROCESS):
+            eventtype="Client service stop"
+        else:
+            eventtype="Process"
+
+
+        return "Time: "+str(self.time_stamp)+" "+eventtype+" "+str(self.destination)
 
     def __cmp__(self, other):
         if self.time_stamp > other.time_stamp:
@@ -32,6 +43,13 @@ class Event:
         elif self.time_stamp < other.time_stamp:
             return -1
         return 0
+
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o,Event):
+            return self.time_stamp == o.time_stamp and self.type == o.type
+
+    def __lt__(self, other):
+        return self.time_stamp-other.time_stamp
 
     def add_time(self, delay: int):
         self.time_stamp = self.time_stamp + delay

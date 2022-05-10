@@ -10,9 +10,13 @@ class ClientGenerator(Station):
         self.next_station = next_station
         self.distribution = distribution
         time = distribution.next_sample()
-        evt = Event(time, self, self, EventType.DEPARTURE)
+        evt = Event(time, self, EventType.DEPARTURE)
         simulator.schedule_event(evt)
 
     def client_departure(self, event):
-        evt = Event(0, self.next_station, self.next_station, EventType.ARRIVAL)
+        evt = Event(0,  self.next_station, EventType.ARRIVAL)
         self.simulator.schedule_event(evt)
+        time = self.distribution.next_sample()
+        evt = Event(time,  self, EventType.DEPARTURE)
+        self.simulator.schedule_event(evt)
+
