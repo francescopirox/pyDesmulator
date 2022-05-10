@@ -12,6 +12,7 @@ class InfinityStation(Station):
         self.distribution = distribution
 
     def service_client_start(self, event):
-        super().service_client_start(event)
-        evt = Event(self.distribution.next_sample(), self, EventType.END_PROCESS)
+        time=self.distribution.next_sample()
+        evt = Event(time, self, EventType.END_PROCESS)
         self.simulator.schedule_event(evt)
+        self.observer.client_service_start(time)

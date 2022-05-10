@@ -23,7 +23,8 @@ class Simulator:
             evt = self.event_list.pop()
             if evt is None:
                 raise Exception("evt is none")
-
+            if evt.time_stamp != self.time:
+                raise Exception("time error")
             if evt.type is not EventType.NULL and evt.destination is not None:
                 print(evt)
                 if evt.type is EventType.DEPARTURE:
@@ -43,7 +44,8 @@ class Simulator:
     def time_advance(self):
         if len(self.event_list) == 0:
             raise Exception("Simulation DeadLock")
-        next_evt = self.event_list[0]
+        #self.event_list.sort()
+        next_evt = self.event_list[-1]
         if next_evt.time_stamp > self.time:
             self.time = next_evt.time_stamp
         print(self.time)

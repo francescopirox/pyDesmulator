@@ -6,7 +6,7 @@ class ClientGenerator(Station):
     distribution = None
 
     def __init__(self, next_station, observer, simulator, distribution):
-        super().__init__("", observer, simulator)
+        super().__init__("gen", observer, simulator)
         self.next_station = next_station
         self.distribution = distribution
         time = distribution.next_sample()

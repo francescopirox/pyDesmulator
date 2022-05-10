@@ -49,7 +49,7 @@ class Event:
             return self.time_stamp == o.time_stamp and self.type == o.type
 
     def __lt__(self, other):
-        return self.time_stamp-other.time_stamp
+        return self.time_stamp>other.time_stamp
 
     def add_time(self, delay: int):
         self.time_stamp = self.time_stamp + delay

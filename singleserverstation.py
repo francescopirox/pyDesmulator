@@ -8,7 +8,7 @@ class SingleServerStation(InfinityStation):
 
     def client_arrival(self, event):
         if self.observer is not None:
-            self.observer.clientArrival(event.time_stamp)
+            self.observer.client_arrival(event.time_stamp)
         print("Cliente arrivato")
         if self.server_free:
             evt = Event(0, self, EventType.START_PROCESS)
