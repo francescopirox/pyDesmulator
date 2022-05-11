@@ -39,9 +39,14 @@ class Station:
 
     def service_client_stop(self, event):
         if self.observer is not None:
-            self.observer.client_service_stop(event.time_stamp)
+            self.observer.client_service_stop(0)
         evt = Event(0, self, EventType.DEPARTURE)
         self.simulator.schedule_event(evt)
 
     def __str__(self) -> str:
-        return " Stazione: "+self.name+" "
+        return self.name
+
+    def print_state(self):
+        print("Stazione: " + self.name)
+        print("Prossima stazione:" + str(self.next_station))
+

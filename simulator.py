@@ -6,6 +6,7 @@ class Simulator:
     end_time:int = 0
     event_list = []
     station_list = []
+    trace= True
 
     def __init__(self, end_time) -> None:
         super().__init__()
@@ -26,7 +27,8 @@ class Simulator:
             if evt.time_stamp != self.time:
                 raise Exception("time error")
             if evt.type is not EventType.NULL and evt.destination is not None:
-                print(evt)
+                if self.trace:
+                    print(evt)
                 if evt.type is EventType.DEPARTURE:
                     evt.destination.client_departure(evt)
 
@@ -48,9 +50,15 @@ class Simulator:
         next_evt = self.event_list[-1]
         if next_evt.time_stamp > self.time:
             self.time = next_evt.time_stamp
-        print(self.time)
+        if self.trace:
+            print("time: "+str(self.time))
 
     def start_simulation(self):
+        self.time_advance()
+        self.process()
+
+    def resume_simulation(self,time):
+        self.end_time += time
         self.time_advance()
         self.process()
 

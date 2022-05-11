@@ -9,7 +9,6 @@ class SingleServerStation(InfinityStation):
     def client_arrival(self, event):
         if self.observer is not None:
             self.observer.client_arrival(event.time_stamp)
-        print("Cliente arrivato")
         if self.server_free:
             evt = Event(0, self, EventType.START_PROCESS)
             self.simulator.schedule_event(evt)
@@ -25,3 +24,10 @@ class SingleServerStation(InfinityStation):
             self.simulator.schedule_event(evt)
         else:
             self.server_free = True
+
+    def print_state(self):
+        super().print_state()
+        print("Len queue: "+str(self.queue))
+        print("Serv status:" + str(self.server_free))
+
+
