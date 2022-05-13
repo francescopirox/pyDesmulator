@@ -8,7 +8,7 @@ from simulator import Simulator
 class Station:
     next_station = None
     observer: Observer = None
-    simulator:Simulator = None
+    simulator: Simulator = None
     name = ""
 
     def __init__(self, observer:Observer, simulator:Simulator):
@@ -39,7 +39,7 @@ class Station:
 
     def service_client_stop(self, event):
         if self.observer is not None:
-            self.observer.client_service_stop(0)
+            self.observer.client_service_stop(event.time_stamp)
         evt = Event(0, self, EventType.DEPARTURE)
         self.simulator.schedule_event(evt)
 

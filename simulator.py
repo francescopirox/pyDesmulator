@@ -6,7 +6,7 @@ class Simulator:
     end_time:int = 0
     event_list = []
     station_list = []
-    trace= True
+    trace: bool= True
 
     def __init__(self, end_time) -> None:
         super().__init__()
