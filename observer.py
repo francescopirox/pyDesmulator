@@ -12,27 +12,31 @@ class Observer:
     waiting_time:int=0
     arrival_time_list=[]
 
-    def client_arrival(self, time):
-        self.client_arrived +=1
-        self.area += self.last_area_value * (time - self.last_area_mod)
+    def client_arrival(self, time_stamp):
+        self.client_arrived += 1
+        self.area += self.last_area_value * (time_stamp - self.last_area_mod)
         self.last_area_value +=1
-        self.last_area_mod = time
-        self.arrival_time_list.append(time)
+        self.last_area_mod = time_stamp
+        self.arrival_time_list.append(time_stamp)
 
-    def client_departure(self, time):
-        self.client_departed += 1
+    def client_departure(self, time_stamp):
+        if self.client_arrived - self.client_departed>0:
+            self.client_departed += 1
 
-        self.area += self.last_area_value*(time-self.last_area_mod)
-        self.last_area_value -= 1
-        self.last_area_mod = time
-        self.waiting_time += time - self.arrival_time_list.pop(0)
+            self.area += self.last_area_value*(time_stamp - self.last_area_mod)
+            self.last_area_value -= 1
+            self.last_area_mod = time_stamp
 
-    def client_service_start(self, time):
-        self.temp_work_time=time
+            self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
+
+    def client_service_start(self, work_time):
+        if self.client_arrived  - self.client_departed > 0:
+            self.temp_work_time=work_time
 
     def client_service_stop(self,time):
-        self.working_time += self.temp_work_time
-        self.temp_work_time=0
+        if self.client_arrived  - self.client_departed > 0:
+            self.working_time += self.temp_work_time
+            self.temp_work_time=0
 
 
     def get_utilizzazione(self,time):

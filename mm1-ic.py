@@ -34,3 +34,7 @@ while time > 0:
     print("\n")
     st.print_state()
     time = int(input("inserisci il nuovo tempo di simulazione per continuare, -1 per completare: "))
+
+ic=o.get_waiting_time_ic(total_time)
+print(ic.mean_value)
+print(ic.quantile)
