@@ -3,6 +3,7 @@ from event import EventType, Event
 from simulator import Simulator
 from station import Station
 
+# Stazione con infiniti serventi
 
 class InfinityStation(Station):
     distribution: Distribution = None

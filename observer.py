@@ -1,5 +1,6 @@
 from event import Event
 
+# Classe Base Observer
 
 class Observer:
     client_arrived:int =0
@@ -58,6 +59,7 @@ class Observer:
         return self.get_mean_client_queue_or_service(time)/arrival_rate
 
 
+    ##TEST
     def ouput(self,time):
         print("Simulated time: \n"+ str(time))
         print("Arrived client:  "+str(self.client_arrived)+"   Departed client:    "+str(self.client_departed)+"\n")

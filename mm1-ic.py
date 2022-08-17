@@ -5,6 +5,8 @@ from BMICobserver import BMICObserver
 from simulator import Simulator
 from singleserverstation import SingleServerStation
 
+# Coda MM1 Con IC
+
 print("simulatore coda m/m/1")
 lamb = input("inserisci lambda:     ")
 mu = input("inserisci mu:         ")

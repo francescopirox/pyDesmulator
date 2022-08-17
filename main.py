@@ -19,7 +19,7 @@ if __name__ == '__main__':
     st1 = SingleServerStation(o, s, d1)
     gen = ClientGenerator(st1, None, s, lamb)
 
-    st.start_simulation()
+    s.start_simulation()
     o.ouput(1000000)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

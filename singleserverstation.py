@@ -1,6 +1,7 @@
 from event import Event, EventType
 from infinityStation import InfinityStation
 
+# Stazione a Servente Singolo, sfrutta classe base Server
 
 class SingleServerStation(InfinityStation):
     queue: int = 0

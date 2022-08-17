@@ -9,7 +9,7 @@ class EventType(Enum):
     STOP = 4
     START_PROCESS = 5
     END_PROCESS = 6
-
+# Classe che gestisce gli eventi e le sue tipologie
 
 class Event:
     time_stamp: int = 0

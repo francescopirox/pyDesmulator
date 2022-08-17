@@ -2,6 +2,7 @@ import random
 
 from distribution import Distribution
 
+# Distribuzione Esponenziale
 
 class ExponentialDistribution(Distribution):
     l_value=0
@@ -12,8 +13,4 @@ class ExponentialDistribution(Distribution):
 
     def next_sample(self):
         return int(random.expovariate(self.l_value)*1000)
-
-
-
-
 

@@ -4,6 +4,8 @@ from observer import Observer
 from simulator import Simulator
 from singleserverstation import SingleServerStation
 
+# Coda MM1
+
 print("simulatore coda m/m/1")
 lamb = input("inserisci lambda:     ")
 mu = input("inserisci mu:         ")

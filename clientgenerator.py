@@ -1,6 +1,7 @@
 from event import Event, EventType
 from station import Station
 
+# Iniettatore di Clienti.
 
 class ClientGenerator(Station):
     distribution = None

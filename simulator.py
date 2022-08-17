@@ -1,5 +1,5 @@
 from event import Event, EventType
-
+# classe che definisce un simulatore
 
 class Simulator:
     time:int = 0
@@ -12,13 +12,16 @@ class Simulator:
         super().__init__()
         self.end_time = end_time
 
+    # si occupa di aggiungere al "Calendario" gli eventi in ordine
     def schedule_event(self, event: Event):
         event.add_time(self.time)
         self.event_list.append(event)
         self.event_list.sort()
 
+    #si occupa di processare gli eventi  della simulazione
     def process(self):
         while self.time < self.end_time:
+            #lista eventi vuota
             if len(self.event_list) == 0:
                 raise Exception("Simulation DeadLock")
             evt = self.event_list.pop()
@@ -43,6 +46,7 @@ class Simulator:
 
             self.time_advance()
 
+    #Calcola l'avanzamento temporale o mantiene
     def time_advance(self):
         if len(self.event_list) == 0:
             raise Exception("Simulation DeadLock")
@@ -53,14 +57,17 @@ class Simulator:
         if self.trace:
             print("time: "+str(self.time))
 
+    #Permette di fare partire la simulazione saltando al primo istante
     def start_simulation(self):
         self.time_advance()
         self.process()
 
+    #Permette di fare continuare la simulazione
     def resume_simulation(self,time):
         self.end_time += time
         self.time_advance()
         self.process()
 
+    # Effettua il bind tra simulazione e stazioni che ne fanno parte
     def station_bind(self, station):
         self.station_list.append(station)
