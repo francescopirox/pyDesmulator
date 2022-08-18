@@ -5,6 +5,20 @@ from IC import Ic
 from observer import Observer
 
 
+def confidence_interval(values):
+    mean_value: float = 0
+    n = len(values)
+    std_dev: float = 0
+    for value in values:
+        mean_value += value
+    mean_value = mean_value / n
+    for value in values:
+        std_dev += (value - mean_value) ** 2
+    std_dev /= (n - 1)
+    std_dev = math.sqrt(std_dev)
+    return Ic(mean_value, std_dev / math.sqrt(n))
+
+
 class Icobserver(Observer):
     classi: int = 0
     sim_time = 0
@@ -38,22 +52,34 @@ class Icobserver(Observer):
         for observer in self.osservatori:
             values.append(observer.get_waiting_time())
 
-        return self.confidence_interval(values)
+        return confidence_interval(values)
 
-    def confidence_interval(self, values):
-        mean_value: float = 0
-        n = len(values)
-        std_dev: float = 0
-        for value in values:
-            mean_value += value
-        mean_value = mean_value / n
-        for value in values:
-            std_dev += (value - mean_value) ** 2
-        std_dev /= (n - 1)
-        std_dev = math.sqrt(std_dev)
-        return Ic(mean_value, std_dev / math.sqrt(n))
+    def get_throughput_ic(self):
+        values = []
+        for observer in self.osservatori:
+            values.append(observer.get_throughput(self.sim_time))
+
+        return confidence_interval(values)
+
+    def get_utilizzazione_ic(self):
+        values = []
+        for observer in self.osservatori:
+            values.append(observer.get_throughput(self.sim_time))
+
+        return confidence_interval(values)
+
+    def get_mean_client_queue_or_service_ic(self):
+        values = []
+        for observer in self.osservatori:
+            values.append(observer.get_mean_client_queue_or_service(self.sim_time))
+
+        return confidence_interval(values)
 
     ##TEST
     def output(self, time):
         print("Simulated time: \n" + str(time))
-        print("Waiting time in line or in service IC 95:" + str(self.get_waiting_time_ic()))
+        print("Waiting time in line or in service IC 95: " + str(self.get_waiting_time_ic()))
+        print("Throughput IC 95: " + str(self.get_throughput_ic()))
+        print("Utilizzazione IC 95: " + str(self.get_utilizzazione_ic()))
+        print("Queue len IC 95: " + str(self.get_mean_client_queue_or_service_ic()))
+
