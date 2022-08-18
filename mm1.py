@@ -22,15 +22,15 @@ gen = ClientGenerator(st, None, s, d_lamb)
 
 print("**SIMULAZIONE IN CORSO** \n\n")
 s.start_simulation()
-o.ouput(total_time)
-print("\n")
+o.output(total_time)
+print("\n\n")
 st.print_state()
 time = int(input("inserisci il nuovo tempo di simulazione per continuare, -1 per completare: "))
 while time > 0:
     total_time += time
     s.resume_simulation(time)
     print("**SIMULAZIONE IN CORSO** \n \n")
-    o.ouput(total_time)
+    o.output(total_time)
     print("\n")
     st.print_state()
     time = int(input("inserisci il nuovo tempo di simulazione per continuare, -1 per completare: "))

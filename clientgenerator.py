@@ -21,3 +21,7 @@ class ClientGenerator(Station):
         evt = Event(time,  self, EventType.DEPARTURE)
         self.simulator.schedule_event(evt)
 
+    def reset(self):
+        time = self.distribution.next_sample()
+        evt = Event(time, self, EventType.DEPARTURE)
+        self.simulator.schedule_event(evt)

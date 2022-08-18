@@ -71,3 +71,9 @@ class Simulator:
     # Effettua il bind tra simulazione e stazioni che ne fanno parte
     def station_bind(self, station):
         self.station_list.append(station)
+
+    def reset(self):
+        self.time: int = 0
+        self.event_list = []
+        for station in self.station_list:
+            station.reset()

@@ -18,16 +18,6 @@ class ObserverTime:
             return -1
         return 0
 
-
-class Ic:
-    mean_value: float
-    quantile: float
-
-    def __init__(self, mean_value, quantile) -> None:
-        self.quantile = quantile
-        self.mean_value = mean_value
-
-
 class BMICObserver(Observer):
     dump: int
     transitorio: bool = True

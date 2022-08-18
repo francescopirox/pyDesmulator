@@ -47,6 +47,9 @@ class Station:
     def __str__(self) -> str:
         return self.name
 
+    def reset(self):
+        pass
+
     #Stampa traccia
     #Deprecato
     def print_state(self):

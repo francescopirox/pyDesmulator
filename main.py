@@ -20,6 +20,6 @@ if __name__ == '__main__':
     gen = ClientGenerator(st1, None, s, lamb)
 
     s.start_simulation()
-    o.ouput(1000000)
+    o.output(1000000)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
