@@ -6,11 +6,19 @@ from distribution import Distribution
 
 class ExponentialDistribution(Distribution):
     l_value=0
+    r= random.Random()
 
     def __init__(self, l_value) -> None:
         super().__init__()
         self.l_value=l_value
+        self.r.seed()
+
 
     def next_sample(self):
-        return int(random.expovariate(self.l_value)*1000)
+        return int(self.r.expovariate(self.l_value)*1000)
+
+    def change_seed(self):
+        self.r.seed()
+
+
 

@@ -31,11 +31,11 @@ class Observer:
 
             self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
 
-    def client_service_start(self, work_time):
+    def client_service_start(self, work_time:int,time_stamp:int=-1):
         if self.client_arrived - self.client_departed > 0:
             self.temp_work_time = work_time
 
-    def client_service_stop(self, time):
+    def client_service_stop(self, time_stamp:int):
         if self.client_arrived - self.client_departed > 0:
             self.working_time += self.temp_work_time
             self.temp_work_time = 0

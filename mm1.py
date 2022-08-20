@@ -8,7 +8,7 @@ from singleserverstation import SingleServerStation
 
 print("simulatore coda m/m/1")
 lamb = input("inserisci lambda:     ")
-mu = input("inserisci mu:         ")
+mu = input("inserisci mu:       ")
 d_lamb = ExponentialDistribution(float(lamb))
 d_mu = ExponentialDistribution(float(mu))
 

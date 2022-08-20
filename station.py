@@ -54,5 +54,5 @@ class Station:
     #Deprecato
     def print_state(self):
         print("Stazione: " + self.name)
-        print("Prossima stazione:" + str(self.next_station))
+
 

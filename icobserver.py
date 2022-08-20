@@ -21,14 +21,16 @@ def confidence_interval(values):
 
 class Icobserver(Observer):
     classi: int = 0
+    transitorio:int=0
     sim_time = 0
     osservatori = []
     index = 0
 
-    def __init__(self, classi, tempo) -> None:
+    def __init__(self, classi, tempo, transitorio) -> None:
         super().__init__()
         self.classi = classi
         self.sim_time = tempo
+        self.transitorio=transitorio
         for i in range(0, classi):
             self.osservatori.append(Observer())
 
