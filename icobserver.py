@@ -38,16 +38,16 @@ class Icobserver(Observer):
         self.index += 1;
 
     def client_arrival(self, time_stamp):
-        self.osservatori[self.index].client_arrival(time_stamp,time_stamp>self.transitorio)
+        self.osservatori[self.index].client_arrival(time_stamp,time_stamp<self.transitorio)
 
     def client_departure(self, time_stamp):
-        self.osservatori[self.index].client_departure(time_stamp,time_stamp>self.transitorio)
+        self.osservatori[self.index].client_departure(time_stamp,time_stamp<self.transitorio)
 
     def client_service_start(self, work_time,time_stamp):
-        self.osservatori[self.index].client_service_start(work_time,time_stamp>self.transitorio)
+        self.osservatori[self.index].client_service_start(work_time,time_stamp<self.transitorio)
 
     def client_service_stop(self, time_stamp):
-        self.osservatori[self.index].client_service_stop(time_stamp,time_stamp>self.transitorio)
+        self.osservatori[self.index].client_service_stop(time_stamp,time_stamp<self.transitorio)
 
     def get_waiting_time_ic(self):
         values = []
@@ -66,7 +66,7 @@ class Icobserver(Observer):
     def get_utilizzazione_ic(self):
         values = []
         for observer in self.osservatori:
-            values.append(observer.get_throughput(self.sim_time))
+            values.append(observer.get_utilizzazione(self.sim_time))
 
         return confidence_interval(values)
 
@@ -83,5 +83,5 @@ class Icobserver(Observer):
         print("Waiting time in line or in service IC 95: " + str(self.get_waiting_time_ic()))
         print("Throughput IC 95: " + str(self.get_throughput_ic()))
         print("Utilizzazione IC 95: " + str(self.get_utilizzazione_ic()))
-        print("Queue len IC 95: " + str(self.get_mean_client_queue_or_service_ic()))
+        print("Number in IC 95: " + str(self.get_mean_client_queue_or_service_ic()))
 
