@@ -1,30 +1,42 @@
-from event import Event
 
 
 # Classe Base Observer
+from observer import Observer
 
-class Observer:
-    client_arrived: int = 0
-    client_departed: int = 0
-    working_time: int = 0
-    area: float = 0
-    last_area_mod: int = 0
-    last_area_value: int = 0
-    temp_work_time: int = 0
-    waiting_time: int = 0
-    arrival_time_list = []
+
+class Observer_transitorio(Observer):
+    time_transitorio=0
+    uscito=False
+    client_arrived_after=0
+    client_departed_after = 0
+    area = 0
+    last_area_value = 0
+
+
 
     def client_arrival(self, time_stamp, transitorio=False):
-        self.client_arrived += 1
-        self.area += self.last_area_value * (time_stamp - self.last_area_mod)
+        if not transitorio:
+            if not self.uscito:
+
+                self.time_transitorio=time_stamp
+                self.uscito=True
+            self.client_arrived_after +=1
+            self.area += self.last_area_value * (time_stamp - self.last_area_mod)
+        self.client_arrived+=1
         self.last_area_value += 1
         self.last_area_mod = time_stamp
         self.arrival_time_list.append(time_stamp)
 
     def client_departure(self, time_stamp,transitorio=False):
         if self.client_arrived - self.client_departed > 0:
+            if not transitorio:
+                if not self.uscito:
+
+                    self.time_transitorio = time_stamp
+                    self.uscito = True
+                self.client_departed_after += 1
+                self.area += self.last_area_value * (time_stamp - self.last_area_mod)
             self.client_departed += 1
-            self.area += self.last_area_value * (time_stamp - self.last_area_mod)
             self.last_area_value -= 1
             self.last_area_mod = time_stamp
             if not transitorio:
@@ -33,30 +45,37 @@ class Observer:
                 self.arrival_time_list.pop(0)
 
     def client_service_start(self, work_time:int,time_stamp:int=-1, transitorio=False):
-        if self.client_arrived - self.client_departed > 0:
+        if self.client_arrived - self.client_departed > 0 and not transitorio:
             self.temp_work_time = work_time
+            if not self.uscito:
+
+                self.time_transitorio = time_stamp
+                self.uscito = True
 
     def client_service_stop(self, time_stamp:int,transitorio=False):
-        if self.client_arrived - self.client_departed > 0:
+        if self.client_arrived - self.client_departed and not transitorio > 0:
             self.working_time += self.temp_work_time
             self.temp_work_time = 0
+            if not self.uscito:
+                self.time_transitorio = time_stamp
+                self.uscito = True
 
     def get_utilizzazione(self, time):
-        return self.working_time / time
+        return self.working_time / (time-self.time_transitorio)
 
     def get_throughput(self, time):
-        return self.client_departed / (time / 1000)
+        return self.client_departed_after / ((time-self.time_transitorio)/ 1000)
 
     def get_mean_client_queue_or_service(self, time):
         self.area += self.last_area_value * (time - self.last_area_mod)
         self.last_area_mod = time
-        return self.area / time
+        return self.area / (time-self.time_transitorio)
 
     def get_waiting_time(self):
-        return (self.waiting_time / 1000) / self.client_departed
+        return (self.waiting_time/1000) / self.client_departed_after
 
     def get_waiting_time_little(self, time):
-        arrival_rate = self.client_arrived / (time / 1000)
+        arrival_rate = self.client_arrived / ((time-self.time_transitorio) / 1000)
         return self.get_mean_client_queue_or_service(time) / arrival_rate
 
     ##TEST

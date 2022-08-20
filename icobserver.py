@@ -2,7 +2,7 @@
 import math
 
 from IC import Ic
-from observer import Observer
+from observer_transitorio import Observer_transitorio
 
 
 def confidence_interval(values):
@@ -19,12 +19,13 @@ def confidence_interval(values):
     return Ic(mean_value, std_dev / math.sqrt(n))
 
 
-class Icobserver(Observer):
+class Icobserver(Observer_transitorio):
     classi: int = 0
     transitorio:int=0
     sim_time = 0
     osservatori = []
     index = 0
+
 
     def __init__(self, classi, tempo, transitorio) -> None:
         super().__init__()
@@ -32,10 +33,16 @@ class Icobserver(Observer):
         self.sim_time = tempo
         self.transitorio=transitorio
         for i in range(0, classi):
-            self.osservatori.append(Observer())
+            self.osservatori.append(Observer_transitorio())
 
     def cambia_osservatore(self):
         self.index += 1;
+        self.arrival_time_list.clear()
+        self.client_arrived=0
+        self.waiting_time=0
+        self.working_time=0
+        self.client_departed=0
+        #self.osservatori[self.index-1].arrival_time_list.clear()
 
     def client_arrival(self, time_stamp):
         self.osservatori[self.index].client_arrival(time_stamp,time_stamp<self.transitorio)
@@ -53,7 +60,7 @@ class Icobserver(Observer):
         values = []
         for observer in self.osservatori:
             values.append(observer.get_waiting_time())
-
+        print(values)
         return confidence_interval(values)
 
     def get_throughput_ic(self):
