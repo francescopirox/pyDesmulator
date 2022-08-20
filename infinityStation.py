@@ -16,7 +16,7 @@ class InfinityStation(Station):
         time=self.distribution.next_sample()
         evt = Event(time, self, EventType.END_PROCESS)
         self.simulator.schedule_event(evt)
-        self.observer.client_service_start(time)
+        self.observer.client_service_start(time,event.time_stamp)
 
     def reset(self):
         self.distribution.change_seed()

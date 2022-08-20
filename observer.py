@@ -14,29 +14,30 @@ class Observer:
     waiting_time: int = 0
     arrival_time_list = []
 
-    def client_arrival(self, time_stamp):
+    def client_arrival(self, time_stamp, transitorio=False):
         self.client_arrived += 1
-        self.area += self.last_area_value * (time_stamp - self.last_area_mod)
+        if not transitorio:
+            self.area += self.last_area_value * (time_stamp - self.last_area_mod)
         self.last_area_value += 1
         self.last_area_mod = time_stamp
         self.arrival_time_list.append(time_stamp)
 
-    def client_departure(self, time_stamp):
+    def client_departure(self, time_stamp,transitorio=False):
         if self.client_arrived - self.client_departed > 0:
             self.client_departed += 1
-
-            self.area += self.last_area_value * (time_stamp - self.last_area_mod)
+            if not transitorio:
+                self.area += self.last_area_value * (time_stamp - self.last_area_mod)
             self.last_area_value -= 1
             self.last_area_mod = time_stamp
+            if not transitorio:
+                self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
 
-            self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
-
-    def client_service_start(self, work_time:int,time_stamp:int=-1):
-        if self.client_arrived - self.client_departed > 0:
+    def client_service_start(self, work_time:int,time_stamp:int=-1, transitorio=False):
+        if self.client_arrived - self.client_departed > 0 and not transitorio:
             self.temp_work_time = work_time
 
-    def client_service_stop(self, time_stamp:int):
-        if self.client_arrived - self.client_departed > 0:
+    def client_service_stop(self, time_stamp:int,transitorio=False):
+        if self.client_arrived - self.client_departed and not transitorio > 0:
             self.working_time += self.temp_work_time
             self.temp_work_time = 0
 

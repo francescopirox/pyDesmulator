@@ -14,6 +14,7 @@ d_lamb = ExponentialDistribution(float(lamb))
 d_mu = ExponentialDistribution(float(mu))
 classi=25
 durata=1000000
+transitorio=10000
 
 
 s = Simulator(durata)

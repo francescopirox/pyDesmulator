@@ -38,16 +38,16 @@ class Icobserver(Observer):
         self.index += 1;
 
     def client_arrival(self, time_stamp):
-        self.osservatori[self.index].client_arrival(time_stamp)
+        self.osservatori[self.index].client_arrival(time_stamp,time_stamp>self.transitorio)
 
     def client_departure(self, time_stamp):
-        self.osservatori[self.index].client_departure(time_stamp)
+        self.osservatori[self.index].client_departure(time_stamp,time_stamp>self.transitorio)
 
-    def client_service_start(self, work_time):
-        self.osservatori[self.index].client_service_start(work_time)
+    def client_service_start(self, work_time,time_stamp):
+        self.osservatori[self.index].client_service_start(work_time,time_stamp>self.transitorio)
 
-    def client_service_stop(self, time):
-        self.osservatori[self.index].client_service_stop(time)
+    def client_service_stop(self, time_stamp):
+        self.osservatori[self.index].client_service_stop(time_stamp,time_stamp>self.transitorio)
 
     def get_waiting_time_ic(self):
         values = []
