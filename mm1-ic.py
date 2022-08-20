@@ -13,8 +13,8 @@ mu = input("inserisci      mu:          ")
 d_lamb = ExponentialDistribution(float(lamb))
 d_mu = ExponentialDistribution(float(mu))
 classi=25
-durata=1000000
-transitorio=10000
+durata=10000000
+transitorio=100000
 
 
 s = Simulator(durata)

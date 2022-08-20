@@ -8,5 +8,5 @@ class Ic:
 
     #Deafault 95
     def __str__(self) -> str:
-        return self.mean_value.__str__()+" +/- "+ (1.96*self.quantile).__str__()
+        return (self.mean_value-(1.65*self.quantile)).__str__()+" <-> "+ (self.mean_value+(1.65*self.quantile)).__str__()
 

@@ -42,7 +42,7 @@ class Icobserver(Observer_transitorio):
         self.waiting_time=0
         self.working_time=0
         self.client_departed=0
-        #self.osservatori[self.index-1].arrival_time_list.clear()
+        self.area=0
 
     def client_arrival(self, time_stamp):
         self.osservatori[self.index].client_arrival(time_stamp,time_stamp<self.transitorio)
@@ -60,7 +60,7 @@ class Icobserver(Observer_transitorio):
         values = []
         for observer in self.osservatori:
             values.append(observer.get_waiting_time())
-        print(values)
+
         return confidence_interval(values)
 
     def get_throughput_ic(self):
@@ -81,7 +81,7 @@ class Icobserver(Observer_transitorio):
         values = []
         for observer in self.osservatori:
             values.append(observer.get_mean_client_queue_or_service(self.sim_time))
-
+        print(values)
         return confidence_interval(values)
 
     ##TEST
