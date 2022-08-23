@@ -12,7 +12,7 @@ mu = input("inserisci      mu:          ")
 d_lamb = ExponentialDistribution(float(lamb))
 d_mu = ExponentialDistribution(float(mu))
 classi=25
-durata=100000000
+durata=250000000
 transitorio=100000
 
 

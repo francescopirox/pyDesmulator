@@ -8,11 +8,16 @@ class Observer:
     client_departed: int = 0
     working_time: int = 0
     area: float = 0
+    last_area_value = 0
     last_area_mod: int = 0
-    last_area_value: int = 0
     temp_work_time: int = 0
     waiting_time: int = 0
-    arrival_time_list = []
+    arrival_time_list = list()
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.arrival_time_list = list()
+        self.arrival_time_list.clear()
 
     def client_arrival(self, time_stamp, transitorio=False):
         self.client_arrived += 1
@@ -21,22 +26,25 @@ class Observer:
         self.last_area_mod = time_stamp
         self.arrival_time_list.append(time_stamp)
 
-    def client_departure(self, time_stamp,transitorio=False):
+    def client_departure(self, time_stamp, transitorio=False):
         if self.client_arrived - self.client_departed > 0:
             self.client_departed += 1
             self.area += self.last_area_value * (time_stamp - self.last_area_mod)
             self.last_area_value -= 1
+            if (self.last_area_value < 0):
+                pass
             self.last_area_mod = time_stamp
-            if not transitorio:
-                self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
-            else:
-                self.arrival_time_list.pop(0)
+            if (len(self.arrival_time_list) > 0):
+                if not transitorio:
+                    self.waiting_time += time_stamp - self.arrival_time_list.pop(0)
+                else:
+                    self.arrival_time_list.pop(0)
 
-    def client_service_start(self, work_time:int,time_stamp:int=-1, transitorio=False):
+    def client_service_start(self, work_time: int, time_stamp: int = -1, transitorio=False):
         if self.client_arrived - self.client_departed > 0:
             self.temp_work_time = work_time
 
-    def client_service_stop(self, time_stamp:int,transitorio=False):
+    def client_service_stop(self, time_stamp: int, transitorio=False):
         if self.client_arrived - self.client_departed > 0:
             self.working_time += self.temp_work_time
             self.temp_work_time = 0
@@ -49,6 +57,11 @@ class Observer:
 
     def get_mean_client_queue_or_service(self, time):
         self.area += self.last_area_value * (time - self.last_area_mod)
+        self.last_area_mod = time
+        return self.area / time
+
+    def get_mean_client_queue_or_service1(self, time: int, sim_time: int):
+        self.area += self.last_area_value * (sim_time - self.last_area_mod)
         self.last_area_mod = time
         return self.area / time
 

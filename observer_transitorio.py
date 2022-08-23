@@ -10,9 +10,16 @@ class Observer_transitorio(Observer):
     client_arrived_after=0
     client_departed_after = 0
     area = 0
-    last_area_value = 0
+    last_area_mod=0
+    arrival_time_list=list()
+    client_arrived=0
+    client_departed=0
+    waiting_time =0
+    working_time=0
 
-
+    def __init__(self) -> None:
+        super().__init__()
+        self.arrival_time_list.clear()
 
     def client_arrival(self, time_stamp, transitorio=False):
         if not transitorio:
