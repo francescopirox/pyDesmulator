@@ -1,6 +1,6 @@
-from event import Event, EventType
-from observer import Observer
-from simulator import Simulator
+from simulators.event import Event, EventType
+from observers import Observer
+from simulators.simulator import Simulator
 
 # Classe che definisce una stazione che mette a disposizione funzionalità limitate
 class Station:

@@ -1,9 +1,8 @@
-
-from clientgenerator import ClientGenerator
-from exponentialDistribution import ExponentialDistribution
-from icobserver import Icobserver
-from simulator import Simulator
-from singleserverstation import SingleServerStation
+from stations.clientgenerator import ClientGenerator
+from distributions.exponentialDistribution import ExponentialDistribution
+from observers.icobserver import Icobserver
+from simulators.simulator import Simulator
+from stations.singleserverstation import SingleServerStation
 
 # Coda MM1 Con IC
 

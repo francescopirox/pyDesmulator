@@ -1,6 +1,6 @@
 import random
 
-from distribution import Distribution
+from distributions.distribution import Distribution
 
 # Distribuzione Esponenziale
 

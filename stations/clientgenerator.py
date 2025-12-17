@@ -1,5 +1,5 @@
-from event import Event, EventType
-from station import Station
+from simulators.event import Event, EventType
+from stations.station import Station
 
 # Iniettatore di Clienti.
 

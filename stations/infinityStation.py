@@ -1,7 +1,7 @@
-from distribution import Distribution
-from event import EventType, Event
-from simulator import Simulator
-from station import Station
+from distributions.distribution import Distribution
+from simulators.event import EventType, Event
+from simulators.simulator import Simulator
+from .station import Station
 
 # Stazione con infiniti serventi
 

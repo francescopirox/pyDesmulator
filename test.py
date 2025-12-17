@@ -5,11 +5,11 @@
 
 
 # Press the green button in the gutter to run the script.
-from clientgenerator import ClientGenerator
-from exponentialDistribution import ExponentialDistribution
-from observer import Observer
-from simulator import Simulator
-from singleserverstation import SingleServerStation
+from stations.clientgenerator import ClientGenerator
+from distributions.exponentialDistribution import ExponentialDistribution
+from observers.observer import Observer
+from simulators.simulator import Simulator
+from stations.singleserverstation import SingleServerStation
 
 if __name__ == '__main__':
     s = Simulator(1000000)

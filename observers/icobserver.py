@@ -1,8 +1,8 @@
 # Implementa il metodo delle repliche indipendenti
 import math
 
-from IC import Ic
-from observer_transitorio import Observer_transitorio
+from util.IC import Ic
+from observers.observer_transitorio import Observer_transitorio
 
 
 def confidence_interval(values):

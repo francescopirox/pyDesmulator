@@ -1,6 +1,3 @@
-from event import Event
-
-
 # Classe Base Observer
 
 class Observer:
@@ -66,6 +63,7 @@ class Observer:
         return self.area / time
 
     def get_waiting_time(self):
+        #aggiungere controllo divisione per zero
         return (self.waiting_time / 1000) / self.client_departed
 
     def get_waiting_time_little(self, time):

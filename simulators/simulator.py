@@ -1,4 +1,5 @@
-from event import Event, EventType
+from .event import Event, EventType
+
 # classe che definisce un simulatore
 
 class Simulator:

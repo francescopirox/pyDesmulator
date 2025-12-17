@@ -1,8 +1,8 @@
-from clientgenerator import ClientGenerator
-from exponentialDistribution import ExponentialDistribution
-from observer import Observer
-from simulator import Simulator
-from singleserverstation import SingleServerStation
+from stations.clientgenerator import ClientGenerator
+from distributions.exponentialDistribution import *
+from observers.observer import Observer
+from simulators.simulator import Simulator
+from stations.singleserverstation import SingleServerStation
 
 # Coda MM1
 
@@ -15,7 +15,7 @@ d_mu = ExponentialDistribution(float(mu))
 time = int(input("inserisci il tempo di simulazione: "))
 total_time = time
 s = Simulator(time)
-s.trace = False
+s.trace = True
 o = Observer()
 st = SingleServerStation(o, s, d_mu)
 gen = ClientGenerator(st, None, s, d_lamb)

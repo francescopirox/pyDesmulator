@@ -1,5 +1,5 @@
-from event import Event, EventType
-from infinityStation import InfinityStation
+from simulators.event import Event, EventType
+from stations.infinityStation import InfinityStation
 
 
 # Stazione a Servente Singolo, sfrutta classe base Server

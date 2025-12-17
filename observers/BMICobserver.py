@@ -1,8 +1,8 @@
 import math
 
-from icobserver import confidence_interval
-from observer import Observer
-from observer_transitorio import Observer_transitorio
+from .icobserver import confidence_interval
+from .observer import Observer
+from .observer_transitorio import Observer_transitorio
 
 
 class BMICObserver(Observer):

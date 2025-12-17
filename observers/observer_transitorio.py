@@ -1,8 +1,4 @@
-
-
-# Classe Base Observer
-from observer import Observer
-
+from .observer import Observer;
 
 class Observer_transitorio(Observer):
     time_transitorio=0
