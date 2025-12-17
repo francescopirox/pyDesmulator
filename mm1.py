@@ -12,13 +12,16 @@ mu = input("inserisci mu:       ")
 d_lamb = ExponentialDistribution(float(lamb))
 d_mu = ExponentialDistribution(float(mu))
 
+
 time = int(input("inserisci il tempo di simulazione: "))
 total_time = time
 s = Simulator(time)
 s.trace = True
 o = Observer()
 st = SingleServerStation(o, s, d_mu)
+st.name="station"
 gen = ClientGenerator(st, None, s, d_lamb)
+gen.name="generator"
 
 print("**SIMULAZIONE IN CORSO** \n\n")
 s.start_simulation()

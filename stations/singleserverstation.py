@@ -1,3 +1,5 @@
+from distributions import Distribution
+from simulators import Simulator
 from simulators.event import Event, EventType
 from stations.infinityStation import InfinityStation
 
@@ -5,8 +7,11 @@ from stations.infinityStation import InfinityStation
 # Stazione a Servente Singolo, sfrutta classe base Server
 
 class SingleServerStation(InfinityStation):
-    queue: int = 0
-    server_free: bool = True
+
+    def __init__(self, observer, simulator: Simulator, distribution: Distribution):
+        self.queue: int = 0
+        self.server_free: bool = True
+        super().__init__(observer, simulator, distribution)
 
     def client_arrival(self, event):
         if self.observer is not None:

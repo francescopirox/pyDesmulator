@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class EventType(Enum):
     NULL = 0
     START = 1
@@ -16,8 +15,9 @@ class Event:
     destination = None
     type = EventType.NULL
 
-    def __init__(self, time_stamp: int, destination, event_type):
-        self.time_stamp = time_stamp
+    def __init__(self, delay: int, destination, event_type: EventType):
+        self.delay=delay
+        self.time_stamp = 0
         self.destination = destination
         self.type = event_type
 
@@ -34,9 +34,10 @@ class Event:
         else:
             eventtype="Process"
 
-
-        return "Time: "+str(self.time_stamp)+" "+eventtype+" "+str(self.destination)
-
+        if self.destination is not None:
+            return "Time: "+str(self.time_stamp)+" "+eventtype+" "+str(self.destination)
+        else:
+            return "Time: " + str(self.time_stamp) + " " + eventtype + " "
     def __cmp__(self, other):
         if self.time_stamp > other.time_stamp:
             return 1
@@ -51,5 +52,5 @@ class Event:
     def __lt__(self, other):
         return self.time_stamp>other.time_stamp
 
-    def add_time(self, delay: int):
-        self.time_stamp = self.time_stamp + delay
+    def add_time_stamp(self, actual_time: int):
+        self.time_stamp = self.delay + actual_time

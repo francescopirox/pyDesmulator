@@ -3,19 +3,19 @@ from .event import Event, EventType
 # classe che definisce un simulatore
 
 class Simulator:
-    time:int = 0
-    end_time:int = 0
-    event_list = []
-    station_list = []
-    trace: bool= True
 
     def __init__(self, end_time) -> None:
+
         super().__init__()
         self.end_time = end_time
+        self.time: int = 0
+        self.event_list = []
+        self.station_list = []
+        self.trace: bool = True
 
     # si occupa di aggiungere al "Calendario" gli eventi in ordine
     def schedule_event(self, event: Event):
-        event.add_time(self.time)
+        event.add_time_stamp(self.time)
         self.event_list.append(event)
         self.event_list.sort()
 

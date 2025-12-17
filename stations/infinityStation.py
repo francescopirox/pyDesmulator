@@ -3,7 +3,7 @@ from simulators.event import EventType, Event
 from simulators.simulator import Simulator
 from .station import Station
 
-# Stazione con infiniti serventi
+# Stazione con infiniti serventi, code illimitate
 
 class InfinityStation(Station):
     distribution: Distribution = None

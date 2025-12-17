@@ -4,27 +4,26 @@ from simulators.simulator import Simulator
 
 # Classe che definisce una stazione che mette a disposizione funzionalità limitate
 class Station:
-    next_station = None
-    observer: Observer = None
-    simulator: Simulator = None
-    name = ""
 
     def __init__(self, observer:Observer, simulator:Simulator):
-        self.observer = observer
-        self.simulator = simulator
+        self.observer:Observer = observer
+        self.simulator:Simulator = simulator
         self.simulator.station_bind(self)
+        self.next_station = None
+        self.name=""
 
     def __init__(self, name: str, observer:Observer, simulator:Simulator):
         self.observer = observer
         self.simulator = simulator
         self.simulator.station_bind(self)
-        self.simulator.name = name
+        self.next_station = None
+        self.name = name
 
     #Metodo invocato dal simulatore
-    def client_arrival(self, event):
-        if self.observer is not None:
-            self.observer.client_arrival(event.time_stamp)
-        evt = Event(0, self, self, EventType.START_PROCESS)
+    def client_arrival(self, event:Event):
+        if self.observer is not None: ##generico non usare
+            self.observer.client_arrival(event.time_stamp) #LOG
+        evt = Event(0,self, EventType.START_PROCESS)
         self.simulator.schedule_event(evt)
 
     #Metodo Invocato dal simulatore
